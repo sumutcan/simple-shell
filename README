@@ -1,0 +1,8 @@
+simple shell for unix based systems
+
+***runs commands with or without parameter(s)
+***basic signal handling
+***pipelining (popen system call)
+***input and output redirection
+***command history (10 commands)
+***runs specific command from history (via command number)
