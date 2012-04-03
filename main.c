@@ -15,7 +15,7 @@ int main(int argc, char *argv[], char *envp[]){
 
     char buffer[BUFFER_SIZE]; //buffer for user command
     char *args[ARR_SIZE]; //splitted args
-    char sonKomutlar[100][BUFFER_SIZE]; //a stack for last 10 commands
+    char recentCommands[100][BUFFER_SIZE]; //a stack for last 10 commands
     int top = -1; // top of stack
     int bottom = 0; //bottom of stack
     int count; //history count
@@ -48,7 +48,7 @@ do
             exit(1);
 
         if(strcmp(args[0],"history") != 0 && args[0][0] != '!')
-        historyStackPush(&top,&bottom,command,sonKomutlar); //push command to history
+        historyStackPush(&top,&bottom,command,recentCommands); //push command to history
 
 
           count = 1;
@@ -68,14 +68,14 @@ do
                 }
 
 
-            historyStackPop(&top, &bottom, count,sonKomutlar);
+            historyStackPop(&top, &bottom, count,recentCommands);
             continue;
           }
           else if (args[0][0] == '!')
           {
             commandNo = atoi(&args[0][1]);
 
-            getSpecificCommand(&top, commandToExec, commandNo,sonKomutlar);
+            getSpecificCommand(&top, commandToExec, commandNo,recentCommands);
 
             if (redirect(commandToExec) != 0)
             continue;
